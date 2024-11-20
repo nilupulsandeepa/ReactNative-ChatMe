@@ -13,10 +13,14 @@ export const getBackgroundColors = (isDarkTheme: boolean) => {
     return isDarkTheme ? colors["primary_background_dark"] : colors["primary_background_light"];
 }
 
+export const getSecondaryBackgroundColors = (isDarkTheme: boolean) => {
+    return isDarkTheme ? colors["secondary_background_dark"] : colors["secondary_background_light"];
+}
+
 export const getTextColors = (isDarkTheme: boolean) => {
     return isDarkTheme ? colors["primary_text_dark"] : colors["primary_text_light"];
 }
 
-export const getBorderColors = (isDarkTheme: boolean) => {
+export const getOtherColors = (isDarkTheme: boolean) => {
     return isDarkTheme ? colors["primary_border_dark"] : colors["primary_border_light"];
 }

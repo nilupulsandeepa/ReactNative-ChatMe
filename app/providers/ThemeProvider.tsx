@@ -5,7 +5,7 @@ import { Appearance } from "react-native";
 //---- Provider
 const ThemeContext = createContext(false);
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
+export const ThemeProvider = ({children}) => {
     //Step 1: Get initial theme
     const [isDarkTheme, setIsDarkTheme] = useState(Appearance.getColorScheme() === 'dark');
 

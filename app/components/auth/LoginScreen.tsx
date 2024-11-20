@@ -1,15 +1,15 @@
 //---- Imports
 import { useContext } from "react";
-import { Button, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Button, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import ThemeContext from "../../providers/ThemeProvider";
-import { getBackgroundColors, getBorderColors, getTextColors } from "../../utils/ColorUtils";
+import { getBackgroundColors, getOtherColors, getTextColors } from "../../utils/ColorUtils";
 import AuthContext, { AuthContextType } from "../../providers/AuthProvider";
 
 //---- Components
 const LoginScreen = () => {
     const isDarkTheme: boolean = useContext(ThemeContext);
-    const {isUserLoggedIn, startGoogleSignIn} = useContext<AuthContextType>(AuthContext);
+    const {isSignInInProgress, startGoogleSignIn} = useContext<AuthContextType>(AuthContext);
 
     return (
         <SafeAreaView style={[styles.container, {backgroundColor: getBackgroundColors(isDarkTheme)}]}>
@@ -17,13 +17,16 @@ const LoginScreen = () => {
             <Text style={[styles.title, {color: getTextColors(isDarkTheme)}]}>Welcome {isDarkTheme}</Text>
             <Text style={[styles.subtitleView, styles.subtitle, {color: getTextColors(isDarkTheme)}]}>Continue to ChatMe</Text>
             <TouchableOpacity
-                style={[styles.signInButtonContainer, {borderColor: getBorderColors(isDarkTheme)}]}
+                style={[styles.signInButtonContainer, {borderColor: getOtherColors(isDarkTheme)}]}
                 activeOpacity={0.5}
                 onPress={startGoogleSignIn}
+                disabled={isSignInInProgress}
             >
                 <Image style={[styles.imageView]} source={require('./assets/google.png')} />
                 <Text style={[styles.buttonText, {color: getTextColors(isDarkTheme)}]}>SignIn with Google</Text>
             </TouchableOpacity>
+
+            <ActivityIndicator style={[styles.activityIndicatorView, {opacity: isSignInInProgress ? 1.0 : 0.0}]} size="small" color={getOtherColors(isDarkTheme)} />
         </SafeAreaView>
     );
 };
@@ -70,6 +73,9 @@ const styles = StyleSheet.create({
         width: 36,
         height: 36,
         padding: 5,
+    },
+    activityIndicatorView: {
+        marginTop: 18
     }
 });
 
